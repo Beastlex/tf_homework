@@ -19,8 +19,8 @@ variable "pglogin" {
 }
 
 variable "pgpasswd" {
-  type        = string
-  default     = "!SoStr0ngPassword"
+  type    = string
+  default = "!SoStr0ngPassword"
 }
 
 variable "dbname" {
