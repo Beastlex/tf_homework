@@ -5,7 +5,7 @@ variable "location" {
 
 variable "postfix" {
   type    = string
-  default = "alzver-proj"
+  default = "alzver-hw02"
 }
 
 variable "owner" {
@@ -20,16 +20,10 @@ variable "pglogin" {
 
 variable "pgpasswd" {
   type        = string
-  default     = "~/.ssh/aks-alzver-proj/dbsec.txt"
-  description = "Path to file with password for PostgreSQL"
+  default     = "!SoStr0ngPassword"
 }
 
 variable "dbname" {
   type    = string
-  default = "statdb"
-}
-
-variable "ssh-public-key" {
-  default     = "~/.ssh/aks-alzver-proj/aks-ssh-key.pub"
-  description = "SSH Public Key for aks linux nodes"
+  default = "demodb"
 }

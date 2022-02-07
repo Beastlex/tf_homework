@@ -11,18 +11,33 @@ provider "azurerm" {
   features {}
 }
 
-data "azurerm_virtual_network" "vnc" {
-  name = var.vnc_name
-  resource_group_name = var.rg_name
+resource "azurerm_resource_group" "rg-alzver-proj" {
+  name = "rg-${var.postfix}"
+  location = var.location
 }
 
-data "azurerm_subnet" "subnet" {
-  name = var.subnet_name
-  resource_group_name = var.rg_name
-  virtual_network_name = var.vnc_name
+resource "azurerm_virtual_network" "vnc-alzver-proj" {
+  name = "vnc-${var.postfix}"
+  address_space = ["10.0.0.0/16"]
+  location = var.location
+  resource_group_name = azurerm_resource_group.rg-alzver-proj.name
 }
 
-data "azurerm_network_security_group" "nsg" {
-  name = var.sg_name
-  resource_group_name = var.rg_name
+resource "azurerm_subnet" "subnet-int" {
+  name = "subnet-int"
+  resource_group_name = azurerm_resource_group.rg-alzver-proj.name
+  virtual_network_name = azurerm_virtual_network.vnc-alzver-proj.name
+  address_prefixes = ["10.0.1.0/24"]
+}
+
+resource "azurerm_network_interface" "nic-alzver-proj" {
+  name = "nic-${var.postfix}"
+  location = var.location
+  resource_group_name = azurerm_resource_group.rg-alzver-proj.name
+
+  ip_configuration {
+    name = "ipconfig01"
+    subnet_id = azurerm_subnet.subnet-int.id
+    private_ip_address_allocation = "Dynamic"
+  }
 }
