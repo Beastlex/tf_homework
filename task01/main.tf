@@ -12,17 +12,17 @@ provider "azurerm" {
 }
 
 data "azurerm_virtual_network" "vnc" {
-  name = var.vnc_name
+  name                = var.vnc_name
   resource_group_name = var.rg_name
 }
 
 data "azurerm_subnet" "subnet" {
-  name = var.subnet_name
-  resource_group_name = var.rg_name
+  name                 = var.subnet_name
+  resource_group_name  = var.rg_name
   virtual_network_name = var.vnc_name
 }
 
 data "azurerm_network_security_group" "nsg" {
-  name = var.sg_name
+  name                = var.sg_name
   resource_group_name = var.rg_name
 }

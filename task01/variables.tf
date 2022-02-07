@@ -9,11 +9,11 @@ variable "vnc_name" {
 }
 
 variable "subnet_name" {
-  type = string
+  type    = string
   default = "epm-rdsp-eastus-subnet"
 }
 
 variable "sg_name" {
-  type = string 
+  type    = string
   default = "epm-rdsp-eastus-sg"
 }
